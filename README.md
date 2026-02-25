@@ -36,7 +36,7 @@ Project Members:
 ```
 ML_Group_AH/
 ├── notebooks/            # Prototyping and exploration notebooks
-├── main.py               # Streamlit application entry point
+├── main.py               # Machine learning model entry point
 ├── requirements.txt      # pip dependencies
 ├── environment.yml       # Conda environment specification
 ├── .gitignore
