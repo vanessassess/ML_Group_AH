@@ -7,17 +7,17 @@ Our project aims to predict customer response to targeted marketing campaigns fo
 The main challenge lies in identifying which customers are most likely to respond positively to this offer, as untargeted marketing efforts result in low response rates and wasted resources. 
 
 Acting as an internal analytics team, we propose building a machine learning model that estimates the probability of a customer accepting the monthly food basket campaign using variables such as:
-•	Historical spending across premium product categories (wine, meat, fish, sweets, gold products)
-•	Past campaign acceptance patterns (5 previous campaigns)
-•	Purchase channel preferences (web, catalog, store, deals)
-•	Customer demographics and family composition
-•	Recency of last purchase and engagement metrics
+* Historical spending across premium product categories (wine, meat, fish, sweets, gold products)
+* Past campaign acceptance patterns (5 previous campaigns)
+* Purchase channel preferences (web, catalog, store, deals)
+* Customer demographics and family composition
+* Recency of last purchase and engagement metrics
 
 The outcome of this model can help the company:
-•	Target high-probability responders for future campaigns
-•	Optimize marketing spend by focusing on receptive segments
-•	Improve campaign ROI and reduce customer acquisition costs
-•	Personalize campaign messaging based on customer profiles"
+* Target high-probability responders for future campaigns
+* Optimize marketing spend by focusing on receptive segments
+* Improve campaign ROI and reduce customer acquisition costs
+* Personalize campaign messaging based on customer profiles"
 
 Dataset: https://www.kaggle.com/datasets/rodsaldanha/arketing-campaign
 
