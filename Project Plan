@@ -1,0 +1,202 @@
+# Marketing Campaign ML Project — Master Plan
+
+
+> **Business Goal:** Predict customer probability of accepting a monthly food basket subscription campaign, enabling targeted marketing and optimized spend.
+>
+> **Dataset:** [Kaggle — Marketing Campaign](https://www.kaggle.com/datasets/rodsaldanha/arketing-campaign)  
+> **Target Variable:** `Response` (1 = accepted, 0 = did not accept)
+
+---
+
+## 👥 Team Allocation
+
+| Person | Responsibilities |
+|---|---|
+| **Isabel** | Introduction · Video slides · Business recommendations |
+| **Dalila** | Data cleaning · Feature engineering · EDA |
+| **Inês + Mariana** | Baseline modelling (Logistic Regression) · Business interpretation · Video editing |
+| **Vanessa + Rita** | Advanced modelling (Random Forest) · Business interpretation |
+
+---
+
+## Deliverables
+
+| Deliverable | Spec |
+|---|---|
+| **Report** | 5 pages · Arial 11 · Spacing 1.5 (cover, TOC, references excluded) |
+| **Video** | 3 min · Business problem → Analysis → Recommendations |
+| **Code** | Documented Jupyter notebook, readable by outsiders |
+
+---
+
+## Phase-by-Phase Plan
+
+---
+
+### Phase 1 — Setup & Data Acquisition
+**Owner:** Everyone
+
+- [ ] Download dataset from Kaggle
+- [ ] Set up shared GitHub repo
+- [ ] Agree on coding conventions: section headers, comments, variable naming
+
+---
+
+### Phase 2 — Business Framing
+**Owner:** Isabel · **Report section:** Introduction (~0.5 pages)
+
+- [ ] Define target variable: `Response` (binary classification)
+- [ ] Frame the business problem: low untargeted response rates → wasted spend → need probability scoring
+- [ ] State key assumptions:
+  - Past campaign behaviour predicts future behaviour
+  - Customer demographics are relatively stable
+- [ ] Write Introduction section of the report
+
+---
+
+### Phase 3 — Data Cleaning + Feature Engineering + EDA
+**Owner:** Dalila · **Report section:** EDA (~1 page)
+
+#### 3a — Data Cleaning
+- [ ] Load data, inspect shape, dtypes, missing values (`df.info()`, `df.isnull().sum()`)
+- [ ] Handle missing `Income` values (~24 rows) → impute with median or drop
+- [ ] Parse `Dt_Customer` → engineer **Customer Tenure** (days since enrollment)
+- [ ] Remove outliers (e.g. `Year_Birth = 1893` → Age > 120)
+- [ ] Drop irrelevant/constant columns: `ID`, `Z_CostContact`, `Z_Revenue`
+
+#### 3b — Feature Engineering
+- [ ] `Age` = 2024 − `Year_Birth`
+- [ ] `TotalSpend` = sum of all `Mnt*` columns (wine, meat, fish, sweets, gold, fruits)
+- [ ] `TotalPurchases` = sum of all `Num*Purchases` columns
+- [ ] `TotalCampaignsAccepted` = sum of `AcceptedCmp1` through `AcceptedCmp5`
+- [ ] Simplify `Marital_Status` → binary (e.g. "In relationship" vs "Single")
+- [ ] Encode `Education` → ordinal or dummy (Basic / Graduate / Postgraduate)
+- [ ] `HasChildren` = `Kidhome + Teenhome > 0`
+
+#### 3c — Exploratory Data Analysis
+- [ ] Plot class imbalance of `Response` (~15% positive — critical for modelling!)
+- [ ] Distribution plots: Age, Income, TotalSpend
+- [ ] Correlation heatmap (numerical features vs `Response`)
+- [ ] Boxplots: TotalSpend by Response, Income by Response
+- [ ] Bar charts: acceptance rates across Cmp1–Cmp5 vs final Response
+- [ ] Write EDA section of the report
+
+---
+
+### Phase 4 — Baseline Modelling: Logistic Regression
+**Owner:** Inês + Mariana · **Report section:** Methodology — Baseline (~0.75 pages)
+
+- [ ] **Preprocessing pipeline:**
+  - One-hot encode categorical variables (Education, Marital_Status)
+  - Standard scale numerical features (required for Logistic Regression)
+  - Train/test split: 80/20, **stratified** on `Response`
+- [ ] **Train Logistic Regression:**
+  - Default settings first, then apply regularization
+  - Try L1 (Lasso — implicit feature selection) and L2 (Ridge)
+  - Use `class_weight='balanced'` to handle class imbalance
+- [ ] **Cross-validation:** 5-fold stratified CV, report mean AUC
+- [ ] **Hyperparameter tuning:** GridSearchCV on `C` (regularization strength)
+- [ ] **Evaluation metrics:**
+  - **ROC-AUC** ← primary metric (we rank customers by probability, not just classify)
+  - Precision, Recall, F1 (Recall is especially important — we don't want to miss buyers)
+  - Confusion Matrix
+- [ ] Write baseline modelling section of the report
+
+> 💡 **Why AUC?** A campaign manager wants to target the top 20% most likely to respond. AUC measures the model's ability to rank customers correctly, regardless of a fixed threshold.
+
+---
+
+### Phase 5 — Advanced Modelling: Random Forest
+**Owner:** Vanessa + Rita · **Report section:** Advanced Modelling + Results (~1 page)
+
+- [ ] **Train Random Forest:**
+  - Default settings first
+  - Tune: `n_estimators`, `max_depth`, `min_samples_split`, `max_features` via GridSearchCV or RandomizedSearchCV
+  - Use `class_weight='balanced'`
+- [ ] **Feature Importance:** Extract and plot → key input for business interpretation
+- [ ] *(Optional stretch)* Try XGBoost or Gradient Boosting if time allows
+- [ ] **Model Comparison table:**
+
+| Metric | Logistic Regression | Random Forest |
+|---|---|---|
+| ROC-AUC
+| Precision
+| Recall
+| F1-Score
+| Training Time
+
+- [ ] **Threshold tuning:** Consider lowering classification threshold (e.g. 0.3 instead of 0.5) to increase Recall — in marketing it's better to contact more potential buyers than miss them
+- [ ] Write advanced modelling + results section of the report
+
+---
+
+### Phase 6 — Business Interpretation & Recommendations
+**Owner:** Isabel (leads) + all · **Report section:** Business Implications + Recommendations (~0.75 pages)
+
+- [ ] **Who to target:** Use model probability scores → rank customers → define top decile/quartile
+- [ ] **Profile of likely responders:** Describe the typical "yes" customer using EDA + feature importances
+  - e.g. *"High-income customers who accepted previous campaigns and spend heavily on wine/meat"*
+- [ ] **Marketing Strategy recommendations:**
+  - Segment campaigns by predicted probability buckets (high / medium / low)
+  - Personalize messaging based on spending profile (e.g. wine lovers → premium basket angle)
+  - Estimate ROI improvement vs untargeted campaign
+- [ ] **Limitations:**
+  - Small dataset (~2,200 rows)
+  - Class imbalance
+  - No temporal/out-of-time validation
+- [ ] **Future improvements:**
+  - Real-time customer scoring
+  - A/B testing of targeted vs untargeted
+  - Adding RFM (Recency, Frequency, Monetary) features
+
+---
+
+### Phase 7 — Report Assembly
+**Owner:** Isabel (leads) + all · **Format:** 5 pages, Arial 11, spacing 1.5
+
+| Page | Content | Owner |
+|---|---|---|
+| 1 | Introduction · Business Case · Dataset Overview | Isabel |
+| 2 | Exploratory Data Analysis | Dalila |
+| 3 | Methodology — Feature Engineering + Modelling Approach | Dalila + Inês |
+| 4 | Results — Model Comparison + ROC curves | Vanessa + Rita |
+| 5 | Business Implications · Recommendations · Limitations | Isabel + all |
+
+---
+
+### Phase 8 — Video (3 minutes)
+**Owner:** Isabel (slides) + Inês (editing)
+
+| Timestamp | Content | Presenter |
+|---|---|---|
+| 0:00–0:30 | Business problem | Isabel |
+| 0:30–1:15 | Data & key EDA insights | Dalila |
+| 1:15–2:00 | Modelling approach + results | Inês / Vanessa |
+| 2:00–2:45 | Business recommendations | Isabel |
+| 2:45–3:00 | Wrap-up | All |
+
+---
+
+### Phase 9 — Code Documentation
+**Owner:** Everyone (clean up your own section)
+
+Each notebook section must include:
+- [ ] A **markdown header** explaining what the section does
+- [ ] **Inline comments** explaining non-obvious code
+- [ ] A **summary cell** at the end of each phase with key takeaways
+- [ ] Clear variable names
+
+---
+
+## 📊 Evaluation Criteria Mapping
+
+| Grading Criterion | Covered In |
+|---|---|
+| Understanding & Application of ML Concepts | Phases 4 & 5 |
+| Exploratory Data Analysis | Phase 3c |
+| Feature Selection | Phases 3b, 4 (L1 regularization), 5 (feature importance) |
+| Model Comparison | Phase 5 (comparison table) |
+| Business Interpretation | Phase 6 |
+| Actionable Recommendations | Phase 6 |
+| Clarity & Logic of Written Report | Phase 7 |
+| Code Documentation | Phase 9 |
