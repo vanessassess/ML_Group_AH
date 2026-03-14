@@ -36,8 +36,8 @@
 ### Phase 1 — Setup & Data Acquisition
 **Owner:** Everyone
 
-- [ ] Download dataset from Kaggle
-- [ ] Set up shared GitHub repo
+- [x] Download dataset from Kaggle
+- [x] Set up shared GitHub repo
 - [ ] Agree on coding conventions: section headers, comments, variable naming
 
 ---
@@ -45,9 +45,9 @@
 ### Phase 2 — Business Framing
 **Owner:** Isabel · **Report section:** Introduction (~0.5 pages)
 
-- [ ] Define target variable: `Response` (binary classification)
-- [ ] Frame the business problem: low untargeted response rates → wasted spend → need probability scoring
-- [ ] State key assumptions:
+- [x] Define target variable: `Response` (binary classification)
+- [x] Frame the business problem: low untargeted response rates → wasted spend → need probability scoring
+- [x] State key assumptions:
   - Past campaign behaviour predicts future behaviour
   - Customer demographics are relatively stable
 - [ ] Write Introduction section of the report
@@ -58,26 +58,26 @@
 **Owner:** Dalila · **Report section:** EDA (~1 page)
 
 #### 3a — Data Cleaning
-- [ ] Load data, inspect shape, dtypes, missing values (`df.info()`, `df.isnull().sum()`)
-- [ ] Handle missing `Income` values (~24 rows) → impute with median or drop
-- [ ] Parse `Dt_Customer` → engineer **Customer Tenure** (days since enrollment)
-- [ ] Remove outliers (e.g. `Year_Birth = 1893` → Age > 120)
-- [ ] Drop irrelevant/constant columns: `ID`, `Z_CostContact`, `Z_Revenue`
+- [x] Load data, inspect shape, dtypes, missing values (`df.info()`, `df.isnull().sum()`)
+- [x] Handle missing `Income` values (~24 rows) → impute with median or drop
+- [x] Parse `Dt_Customer` → engineer **Customer Tenure** (days since enrollment)
+- [x] Remove outliers (e.g. `Year_Birth = 1893` → Age > 133)
+- [x] Drop irrelevant/constant columns: `ID`, `Z_CostContact`, `Z_Revenue`
 
 #### 3b — Feature Engineering
-- [ ] `Age` = 2024 − `Year_Birth`
-- [ ] `TotalSpend` = sum of all `Mnt*` columns (wine, meat, fish, sweets, gold, fruits)
-- [ ] `TotalPurchases` = sum of all `Num*Purchases` columns
-- [ ] `TotalCampaignsAccepted` = sum of `AcceptedCmp1` through `AcceptedCmp5`
-- [ ] Simplify `Marital_Status` → binary (e.g. "In relationship" vs "Single")
+- [x] `Age` = 2024 − `Year_Birth`
+- [x] `TotalSpend` = sum of all `Mnt*` columns (wine, meat, fish, sweets, gold, fruits)
+- [x] `TotalPurchases` = sum of all `Num*Purchases` columns
+- [x] `TotalCampaignsAccepted` = sum of `AcceptedCmp1` through `AcceptedCmp5`
+- [x] Simplify `Marital_Status` → binary (e.g. "In relationship" vs "Single")
 - [ ] Encode `Education` → ordinal or dummy (Basic / Graduate / Postgraduate)
 - [ ] `HasChildren` = `Kidhome + Teenhome > 0`
 
 #### 3c — Exploratory Data Analysis
-- [ ] Plot class imbalance of `Response` (~15% positive — critical for modelling!)
-- [ ] Distribution plots: Age, Income, TotalSpend
-- [ ] Correlation heatmap (numerical features vs `Response`)
-- [ ] Boxplots: TotalSpend by Response, Income by Response
+- [x] Plot class imbalance of `Response` (~15% positive — critical for modelling!)
+- [x] Distribution plots: Age, Income, TotalSpend
+- [x] Correlation heatmap (numerical features vs `Response`)
+- [x] Boxplots: TotalSpend by Response, Income by Response
 - [ ] Bar charts: acceptance rates across Cmp1–Cmp5 vs final Response
 - [ ] Write EDA section of the report
 
