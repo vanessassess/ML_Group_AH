@@ -109,13 +109,13 @@
 ### Phase 5 — Advanced Modelling: Random Forest
 **Owner:** Vanessa + Rita · **Report section:** Advanced Modelling + Results (~1 page)
 
-- [ ] **Train Random Forest:**
+- [x] **Train Random Forest:**
   - Default settings first
   - Tune: `n_estimators`, `max_depth`, `min_samples_split`, `max_features` via GridSearchCV or RandomizedSearchCV
   - Use `class_weight='balanced'`
-- [ ] **Feature Importance:** Extract and plot → key input for business interpretation
-- [ ] *(Optional stretch)* Try XGBoost or Gradient Boosting if time allows
-- [ ] **Model Comparison table:**
+- [x] **Feature Importance:** Extract and plot → key input for business interpretation
+- [x] *(Optional stretch)* Try XGBoost or Gradient Boosting if time allows
+- [x] **Model Comparison table:**
 
 | Metric | Logistic Regression | Random Forest |
 |---|---|---|
