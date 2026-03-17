@@ -70,15 +70,15 @@
 - [x] `TotalPurchases` = sum of all `Num*Purchases` columns
 - [x] `TotalCampaignsAccepted` = sum of `AcceptedCmp1` through `AcceptedCmp5`
 - [x] Simplify `Marital_Status` → binary (e.g. "In relationship" vs "Single")
-- [ ] Encode `Education` → ordinal or dummy (Basic / Graduate / Postgraduate)
-- [ ] `HasChildren` = `Kidhome + Teenhome > 0`
+- [ ] Encode `Education` → ordinal or dummy (Basic / Graduate / Postgraduate) -> do not proceed with this feature
+- [ ] `HasChildren` = `Kidhome + Teenhome > 0` -> do not proceed with this feature
 
 #### 3c — Exploratory Data Analysis
 - [x] Plot class imbalance of `Response` (~15% positive — critical for modelling!)
 - [x] Distribution plots: Age, Income, TotalSpend
 - [x] Correlation heatmap (numerical features vs `Response`)
 - [x] Boxplots: TotalSpend by Response, Income by Response
-- [ ] Bar charts: acceptance rates across Cmp1–Cmp5 vs final Response
+- [x] Bar charts: acceptance rates across Cmp1–Cmp5 vs final Response
 - [ ] Write EDA section of the report
 
 ---
